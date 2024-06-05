@@ -1,0 +1,32 @@
+/* PurchasedItems.css */
+.purchased-items-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.purchased-items-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.purchased-item {
+    background-color: #f4f4f4;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.purchased-item h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.25rem;
+}
+
+.purchased-item p {
+    margin: 5px 0;
+}

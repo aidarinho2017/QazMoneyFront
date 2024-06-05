@@ -1,0 +1,51 @@
+.salary-button {
+    width: 400px;
+    height: 120px;
+    background: linear-gradient(45deg, darkgoldenrod, goldenrod);
+    color: white;
+    border: solid 5px black;
+    border-radius: 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.salary-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.3s ease;
+    transform: skewX(-45deg);
+}
+
+.salary-button:hover {
+    background: linear-gradient(45deg, goldenrod, darkgoldenrod);
+    color: #fff;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+    border-color: darkgoldenrod;
+}
+
+.salary-button:hover::before {
+    left: 125%;
+}
+
+.salary-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.timer {
+    color: whitesmoke;
+}

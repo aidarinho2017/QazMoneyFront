@@ -11,6 +11,7 @@ const Navbar = () => {
                 <li><Link to="/shop">Shop</Link></li>
                 <li><Link to="/bought">Purchased</Link></li>
                 <li><Link to="/notes">Notes</Link></li>
+                <li><Link to="/joke">Jokes</Link></li>
                 <li><Link to="/logout">Logout</Link></li>
                 <li className="select-wrapper">
                     <select name="trading" id="trading" className="navbar-select">

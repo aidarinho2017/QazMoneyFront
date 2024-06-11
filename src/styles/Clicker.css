@@ -1,13 +1,17 @@
 /* Clicker.css */
 
+/* Clicker.css */
+
 .clicker-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background: darkslategrey;
+    justify-content: flex-start; /* Align items at the top */
+    background: midnightblue;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh; /* Ensure the height covers the viewport */
+    padding-top: 80px; /* Space for the navbar */
+    box-sizing: border-box;
 }
 
 .coin-count {
@@ -17,9 +21,9 @@
 }
 
 .clicker-button {
-    width: 500px;
-    height: 500px;
-    background-color: darkslateblue; /* Green */
+    width: 300px;
+    height: 300px;
+    background-color: grey;
     color: white;
     border: none;
     border-radius: 50%;
@@ -29,19 +33,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 20px 0;
 }
 
 .clicker-button:hover {
-    background-color: midnightblue; /* Darker green */
+    background-color: darkslategray;
 }
-
 
 @keyframes clickGrowAnimation {
     0% {
         transform: scale(1);
     }
     50% {
-        transform: scale(2.0); /* Increase size */
+        transform: scale(2.0);
     }
     100% {
         transform: scale(1);
@@ -52,8 +56,30 @@
     transform: translateY(10px);
 }
 
-/* Image inside the button */
 .clicker-button img {
-    width: 80%; /* Adjust the size as needed */
+    width: 80%;
     height: auto;
+}
+
+.collect-button {
+    background: linear-gradient(45deg, #00ffcc, #00ccff);
+    border: none;
+    border-radius: 50px;
+    color: #000;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.5), 0 0 40px rgba(0, 204, 255, 0.3);
+    margin-top: 20px;
+}
+
+.collect-button:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.7), 0 0 60px rgba(0, 204, 255, 0.5);
+}
+
+.collect-button:active {
+    transform: scale(0.95);
 }

@@ -51,7 +51,6 @@ const Shop = () => {
             alert('Purchase successful!');
         } catch (error) {
             console.error('Error making purchase:', error);
-            alert('Purchase failed');
         }
     };
 
@@ -65,9 +64,9 @@ const Shop = () => {
                     items.map(item => (
                         <li key={item.id} className="shop-item">
                             <h2>{item.name}</h2>
-                            <p>{item.description}</p>
-                            <p>Price: {item.price} coins</p>
+                            <p>{item.money_per_hour}💸 per hour</p>
                             <button onClick={() => handlePurchase(item.id, item.price)}>Buy</button>
+                            <p>Price: {item.price} 💵</p>
                         </li>
                     ))
                 )}

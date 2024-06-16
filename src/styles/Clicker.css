@@ -83,3 +83,17 @@
 .collect-button:active {
     transform: scale(0.95);
 }
+
+.category-select {
+    background-color: white;
+    color: #333333;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category-select:hover {
+    background-color: ghostwhite;
+}

@@ -8,11 +8,13 @@ import Salary from './Salary';
 const Clicker = () => {
     const [coins, setCoins] = useState(0);
     const [moneyPerHour, setMoneyPerHour] = useState(0);
+    const [happiness, setHappiness] = useState(0);
     const [remainingTime, setRemainingTime] = useState(0);
 
     useEffect(() => {
         fetchCoins();
         fetchMoneyPerHour();
+        fetchHappiness();
     }, []);
 
     useEffect(() => {
@@ -57,6 +59,24 @@ const Clicker = () => {
             setMoneyPerHour(response.data.money_per_hour);
         } catch (error) {
             console.error("Error fetching money per hour:", error);
+        }
+    };
+
+    const fetchHappiness = async () => {
+        try {
+            const token = localStorage.getItem(ACCESS_TOKEN);
+            if (!token) {
+                console.error("No access token found");
+                return;
+            }
+            const response = await api.get('/api/gethappiness/', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setHappiness(response.data.happiness);
+        } catch (error) {
+            console.error("Error fetching happiness:", error);
         }
     };
 
@@ -111,6 +131,7 @@ const Clicker = () => {
         <div className="clicker-container">
             <h1 className="coin-count">QazMoney</h1>
             <h2 className="coin-count">Money per hour: {moneyPerHour}</h2>
+            <h2 className="coin-count">Happiness: {happiness}</h2>  {/* Added happiness */}
             {remainingTime > 0 ? (
                 <p className="timer">Next collection in: {formatTime(remainingTime)}</p>
             ) : (
@@ -129,4 +150,5 @@ const Clicker = () => {
 };
 
 export default Clicker;
+
 

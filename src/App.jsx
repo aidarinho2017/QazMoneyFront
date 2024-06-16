@@ -12,6 +12,7 @@ import PurchasedItems from "./components/PurchasedItems";
 import Salary from "./components/Salary.jsx";
 import AuthContext, { AuthProvider } from "./AuthContext";
 import Joke from "./components/Joke.jsx";
+import Chat from "./components/Chat.jsx";
 
 function Logout() {
     const { logout } = useContext(AuthContext);
@@ -49,6 +50,7 @@ function App() {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/getsalary" element={<Salary />} />
                 <Route path="/bought" element={<PurchasedItems />} />
+                <Route path="/chat" element={<Chat />} />
             </Routes>
         </BrowserRouter>
     );

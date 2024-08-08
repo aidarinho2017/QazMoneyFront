@@ -1,63 +1,46 @@
-import { useState, useEffect } from "react";
-import api from "../api";
-import Note from "../components/Note"
-import "../styles/Home.css"
+import React, { useState } from "react";
+import "../styles/Home.css";
+import NavBar from "../components/NavBar";
+import JobMap from "../components/JobMap";
+import api from "../api.js";
 
-function Home() {
-    const [notes, setNotes] = useState([]);
-    const [content, setContent] = useState("");
+const Home = () => {
     const [title, setTitle] = useState("");
+    const [details, setDetails] = useState("");
+    const [location, setLocation] = useState("");
+    const [coordinates, setCoordinates] = useState([null, null]);
+    const [price, setPrice] = useState("");
 
-    useEffect(() => {
-        getNotes();
-    }, []);
-
-    const getNotes = () => {
-        api
-            .get("/api/notes/")
-            .then((res) => res.data)
-            .then((data) => {
-                setNotes(data);
-                console.log(data);
-            })
-            .catch((err) => alert(err));
-    };
-
-    const deleteNote = (id) => {
-        api
-            .delete(`/api/notes/delete/${id}/`)
-            .then((res) => {
-                if (res.status === 204) alert("Note deleted!");
-                else alert("Failed to delete note.");
-                getNotes();
-            })
-            .catch((error) => alert(error));
-    };
-
-    const createNote = (e) => {
+    const createJob = (e) => {
         e.preventDefault();
-        api
-            .post("/api/notes/", { content, title })
+        const jobData = {
+            title,
+            description: details,
+            location,
+            latitude: coordinates[0],
+            longitude: coordinates[1],
+            price: parseFloat(price),
+        };
+        api.post("/api/jobs/", jobData)
             .then((res) => {
-                if (res.status === 201) alert("Note created!");
-                else alert("Failed to make note.");
-                getNotes();
+                if (res.status === 201) {
+                    alert("Job created!");
+                }
             })
-            .catch((err) => alert(err));
+            .catch((err) => alert("Failed to create job."));
+    };
+
+    const handleLocationSelect = (coords) => {
+        setCoordinates(coords);
     };
 
     return (
-        <div className="back">
-
-            <div>
-                {notes.map((note) => (
-                    <Note note={note} onDelete={deleteNote} key={note.id} />
-                ))}
-            </div>
-            <form onSubmit={createNote}>
-                <label htmlFor="title">Title:</label>
-                <br />
+        <div className="home-container">
+            <NavBar />
+            <form className="job-form" onSubmit={createJob}>
+                <label className="job-form-label" htmlFor="title">Title:</label>
                 <input
+                    className="job-form-input"
                     type="text"
                     id="title"
                     name="title"
@@ -65,20 +48,42 @@ function Home() {
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                 />
-                <label htmlFor="content">Content:</label>
-                <br />
+                <label className="job-form-label" htmlFor="details">Details:</label>
                 <textarea
-                    id="content"
-                    name="content"
+                    className="job-form-textarea"
+                    id="details"
+                    name="details"
                     required
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    value={details}
+                    onChange={(e) => setDetails(e.target.value)}
                 ></textarea>
-                <br />
-                <input type="submit" value="Submit"></input>
+                <label className="job-form-label" htmlFor="location">Location:</label>
+                <input
+                    className="job-form-input"
+                    type="text"
+                    id="location"
+                    name="location"
+                    required
+                    onChange={(e) => setLocation(e.target.value)}
+                    value={location}
+                />
+                <label className="job-form-label">Select Location on Map:</label>
+                <JobMap onLocationSelect={handleLocationSelect} />
+                <label className="job-form-label" htmlFor="price">Price:</label>
+                <input
+                    className="job-form-input"
+                    type="number"
+                    id="price"
+                    name="price"
+                    required
+                    onChange={(e) => setPrice(e.target.value)}
+                    value={price}
+                />
+                <input className="job-form-submit" type="submit" value="Submit" />
             </form>
         </div>
     );
-}
+};
 
 export default Home;
+

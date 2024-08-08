@@ -1,65 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// Chat.jsx
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import api from '../api';
+import NavBar from "../components/NavBar";
+import AuthContext from '../AuthContext';
 import "../styles/Chat.css";
 
-const ChatComponent = () => {
-    const [chats, setChats] = useState([]);
-    const [inputText, setInputText] = useState("");
-    const [loading, setLoading] = useState(false);
+const Chat = () => {
+    const { jobId } = useParams();
+    const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState('');
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        fetchChats();
-    }, []);
+        const fetchMessages = async () => {
+            try {
+                const response = await api.get(`/api/chat_rooms/${jobId}/messages/`);
+                setMessages(response.data);
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+            }
+        };
+        fetchMessages();
+    }, [jobId]);
 
-    const fetchChats = async () => {
-        try {
-            const response = await axios.get('/api/get_chats/');
-            setChats(response.data.chats || []);
-        } catch (error) {
-            console.error("Error fetching chats:", error);
+    const handleSendMessage = async () => {
+        if (!user) {
+            console.error('User not logged in');
+            return;
         }
-    };
-
-    const handleAskQuestion = async () => {
-        setLoading(true);
         try {
-            const response = await axios.post('/api/ask_question/', { text: inputText });
-            setChats([...chats, { text_input: inputText, gemini_output: response.data.data.text, date: new Date().toISOString() }]);
-            setInputText("");
+            await api.post(`/api/chat_rooms/${jobId}/messages/`, { content: newMessage });
+            setNewMessage('');
+            const response = await api.get(`/api/chat_rooms/${jobId}/messages/`);
+            setMessages(response.data);
         } catch (error) {
-            console.error("Error asking question:", error);
+            console.error('Error sending message:', error.response ? error.response.data : error.message);
         }
-        setLoading(false);
     };
 
     return (
-        <div className="chat-container">
-            <div className="chat-input-container">
+        <div>
+            <NavBar />
+            <div className="chat-container">
+                <div className="messages">
+                    {messages.map(message => (
+                        <div key={message.id} className="message">
+                            <span>{message.sender.username}: </span>{message.content}
+                        </div>
+                    ))}
+                </div>
                 <input
                     type="text"
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    placeholder="Ask a question"
+                    value={newMessage}
+                    onChange={e => setNewMessage(e.target.value)}
+                    placeholder="Type a message"
                 />
-                <button onClick={handleAskQuestion} disabled={loading}>
-                    {loading ? "Asking..." : "Ask"}
-                </button>
-            </div>
-            <div className="chat-messages">
-                {chats.length > 0 ? (
-                    chats.map((chat, index) => (
-                        <div key={index} className="chat-message">
-                            <strong>Q:</strong> {chat.text_input}
-                            <strong>A:</strong> {chat.gemini_output}
-                            <em>{new Date(chat.date).toLocaleString()}</em>
-                        </div>
-                    ))
-                ) : (
-                    <p>No chats yet</p>
-                )}
+                <button onClick={handleSendMessage}>Send</button>
             </div>
         </div>
     );
 };
 
-export default ChatComponent;
+export default Chat;

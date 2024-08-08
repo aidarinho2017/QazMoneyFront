@@ -5,14 +5,16 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Clicker from "./components/Clicker";
-import NavBar from "./components/NavBar";
-import Shop from "./components/Shop.jsx";
-import PurchasedItems from "./components/PurchasedItems";
-import Salary from "./components/Salary.jsx";
 import AuthContext, { AuthProvider } from "./AuthContext";
-import Joke from "./components/Joke.jsx";
+import JobMap from "./components/JobMap.jsx";
+import Job from "./components/Job.jsx";
+import ProfileView from "./components/ProfileView.jsx";
+import ProfileEdit from "./components/ProfileEdit.jsx";
+import JobApplications from "./components/JobApplications.jsx";
 import Chat from "./components/Chat.jsx";
+import ChatList from "./components/ChatList.jsx";
+import YourJobs from "./components/YourJobs.jsx";
+import OtherJobs from "./components/OtherJobs.jsx";
 
 function Logout() {
     const { logout } = useContext(AuthContext);
@@ -31,26 +33,30 @@ function App() {
 
     return (
         <BrowserRouter>
-            <NavBar />
             <Routes>
                 <Route
                     path="/"
                     element={
                         <ProtectedRoute>
-                            <Clicker />
+                            <OtherJobs />
                         </ProtectedRoute>
                     }
                 />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/map" element={<Map />} />
+                <Route path="/jobc" element={<Job />} />
+                <Route path="/profile_view" element={<ProfileView />} />
+                <Route path="/profile_edit" element={<ProfileEdit />} />
+                <Route path="/jobs" element={<JobMap />} />
+                <Route path="/yourjobs" element={<YourJobs />} />
+                <Route path="/" element={<OtherJobs />} />
+                <Route path="/chat/:jobId" element={<Chat />} />
+                <Route path="/chats" element={<ChatList />} />
                 <Route path="/register" element={<RegisterAndLogout />} />
-                <Route path="/notes" element={<Home />} />
-                <Route path="/joke" element={<Joke />} />
+                <Route path="/create" element={<Home />} />
+                <Route path="job_apps" element={<JobApplications />} />
                 <Route path="*" element={<NotFound />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/getsalary" element={<Salary />} />
-                <Route path="/bought" element={<PurchasedItems />} />
-                <Route path="/chat" element={<Chat />} />
             </Routes>
         </BrowserRouter>
     );

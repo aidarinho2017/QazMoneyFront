@@ -15,6 +15,7 @@ import Chat from "./components/Chat.jsx";
 import ChatList from "./components/ChatList.jsx";
 import YourJobs from "./components/YourJobs.jsx";
 import OtherJobs from "./components/OtherJobs.jsx";
+import Main from "./components/Main.jsx";
 
 function Logout() {
     const { logout } = useContext(AuthContext);
@@ -43,6 +44,7 @@ function App() {
                     }
                 />
                 <Route path="/login" element={<Login />} />
+                <Route path="/main" element={<Main/>} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/map" element={<Map />} />
                 <Route path="/jobc" element={<Job />} />

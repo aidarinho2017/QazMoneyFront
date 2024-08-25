@@ -1,0 +1,225 @@
+/* General Styles */
+.banner {
+    position: relative;
+}
+
+.tagline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem; /* Adjusted for better responsiveness */
+    text-align: center;
+    z-index: 1;
+    max-width: 90%; /* Prevents overflow */
+}
+
+.pica {
+    width: 100%;
+    height: auto;
+    max-height: 100%; /* Limits height to prevent short images */
+}
+
+.button1 {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Bold', sans-serif;
+    font-weight: 700;
+    font-size: 1rem; /* Adjusted for responsiveness */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 100%; /* Ensures it fits within the container */
+}
+
+.button1:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Banner2 Section */
+.banner2 {
+    height: auto;
+    color: white;
+    background-image: url("../assets/bmw.jpeg");
+    padding: 400px 20px;
+    background-size: cover;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.banner2 h1 {
+    font-size: 2rem; /* Adjusted for better responsiveness */
+}
+
+.banner2 p {
+    font-size: 1.25rem;
+}
+
+/* Plan Section */
+.plan {
+    height: auto;
+    background-image: url("../assets/lunar.jpeg");
+    background-size: cover;
+    margin-top: -25px;
+    padding: 50px 20px; /* Adjusted padding for responsiveness */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.capt {
+    margin-bottom: 50px; /* Adjusted for better spacing */
+    color: white;
+    font-size: 2rem;
+}
+
+.plans {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: center;
+    gap: 20px; /* Adds space between items */
+}
+
+.plans_item {
+    padding: 20px;
+    border: 3px solid #ffffff;
+    border-radius: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 300px; /* Limits width for better responsiveness */
+}
+
+.plans h2 {
+    font-weight: 700;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.plan p {
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1rem;
+}
+
+.linkerclone2 {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    background-color: grey;
+    font-family: 'Bold', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.linkerclone2:hover {
+    transition: 0.7s;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tagline {
+        font-size: 1.5rem;
+    }
+
+    .banner2 h1 {
+        font-size: 1.5rem;
+    }
+
+    .banner2 p {
+        font-size: 1rem;
+    }
+
+    .button1 {
+        font-size: 0.875rem;
+        padding: 10px 15px;
+    }
+
+    .plans_item {
+        width: 80%; /* Makes items more responsive on small screens */
+    }
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000; /* Black background */
+    position: relative;
+    top: 0;
+    width: 96%;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1); /* Light shadow for the nav */
+    z-index: 1000;
+}
+
+.top-nav .nav-link {
+    color: #fff; /* White text */
+    text-decoration: none;
+    font-size: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.top-nav .nav-link:hover {
+    background-color: #333; /* Dark gray background on hover */
+}
+
+.top-nav .right-links {
+    display: flex;
+    gap: 20px;
+}
+
+.top-nav .left-links {
+    display: flex;
+    gap: 20px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 10px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-nav .right-links {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .top-nav .nav-link {
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-nav .nav-link {
+        font-size: 13px;
+        padding: 8px;
+    }
+}

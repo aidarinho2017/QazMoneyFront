@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import api from "../api";
-import { Link, useNavigate } from "react-router-dom";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import {Link, useNavigate} from "react-router-dom";
+import {ACCESS_TOKEN, REFRESH_TOKEN} from "../constants";
 import "../styles/Form.css";
 import LoadingIndicator from "./LoadingIndicator";
 
-function Form({ route, method }) {
+function Form({route, method}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ function Form({ route, method }) {
         e.preventDefault();
 
         try {
-            const res = await api.post(route, { username, password });
+            const res = await api.post(route, {username, password});
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
@@ -72,14 +72,6 @@ function Form({ route, method }) {
                     </div>
                 </div>
             </div>
-            <nav className="top-nav">
-                <Link to="/" className="nav-link left-link">Home</Link>
-                <div className="right-links">
-                    <Link to="/product" className="nav-link">Product</Link>
-                    <Link to="/pricing" className="nav-link">Pricing</Link>
-                    <Link to="/contacts" className="nav-link">Contacts</Link>
-                </div>
-            </nav>
         </div>
     );
 }
